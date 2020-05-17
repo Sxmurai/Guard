@@ -10,6 +10,6 @@ nodes:
       name: "Guard 1",
       address: "localhost",
       port: 6969,
-      password: "niggaonatricle",
+      password: "yeet",
     },
   ]
