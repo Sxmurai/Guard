@@ -128,13 +128,14 @@ export default class GuardClient extends AkairoClient {
       inhibitorHandler: this.inhibitorHandler,
       lavaclient: this.manager,
       websocket: this.ws,
+	  settings: this.db,
       process,
     });
 
-    //await this.db.init();
+    await this.db.init();
     await this.manager.init(config.get("bot.id"));
 
-    //this.apis.loadAll();
+    this.apis.loadAll();
 
     this.commandHandler.loadAll();
     this.listenerHandler.loadAll();

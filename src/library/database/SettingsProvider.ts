@@ -1,6 +1,6 @@
-import { Provider } from "discord-akairo";
-import { Guild } from "discord.js";
+import { Guild, Collection } from "discord.js";
 import { configuration } from "@prisma/client";
+import { EventEmitter } from "events";
 import _ from "dot-prop";
 
 export interface guildSettings {
@@ -17,8 +17,12 @@ export const defaultGuildSettings = {
   },
 };
 
-export class SettingsProvider extends Provider {
+export class SettingsProvider extends EventEmitter {
+  public items: Collection<string, any> = new Collection();
+
   public async init(): Promise<void> {
+    this.emit("initialized");
+
     for (const guild of await prisma.configuration.findMany())
       this.items.set(guild.id, JSON.parse(guild.data));
   }
@@ -45,6 +49,8 @@ export class SettingsProvider extends Provider {
     _.set(item, setting, value);
     this.items.set(SettingsProvider.getGuildID(guild), item);
 
+    this.emit("set", guild, setting, value);
+
     return await prisma.configuration.update({
       where: {
         id: SettingsProvider.getGuildID(guild),
@@ -62,6 +68,8 @@ export class SettingsProvider extends Provider {
     _.delete(item, setting);
     this.items.set(SettingsProvider.getGuildID(guild), item);
 
+    this.emit("delete", guild, setting);
+
     return await prisma.configuration.update({
       where: {
         id: SettingsProvider.getGuildID(guild),
@@ -74,6 +82,9 @@ export class SettingsProvider extends Provider {
 
   public async clear(guild: string | Guild): Promise<configuration> {
     this.items.delete(SettingsProvider.getGuildID(guild));
+
+    this.emit("clear", guild);
+
     return await prisma.configuration.delete({
       where: {
         id: SettingsProvider.getGuildID(guild),
@@ -83,6 +94,7 @@ export class SettingsProvider extends Provider {
 
   public async ensureTable(guild: string | Guild): Promise<guildSettings> {
     let item = this.items.get(SettingsProvider.getGuildID(guild));
+
     if (!item) {
       await prisma.configuration.create({
         data: {
