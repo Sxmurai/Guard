@@ -90,7 +90,7 @@ export default class PlayCommand extends Command {
     if (!player.queue) player.queue = new Queue(player);
 
     const songs = await Rest.search(
-      ["https", "http"].includes(track)
+      track.includes("https://")
         ? track
         : `${type === "youtube" ? "ytsearch" : "scsearch"}:${track}`,
       config.get("nodes")[0]
