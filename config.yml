@@ -1,0 +1,15 @@
+bot:
+  owners: ["535585397435006987"]
+  prefix: "g!"
+  id: "663077021487988746"
+tokens:
+  discord: 
+nodes:
+  [
+    {
+      name: "Guard 1",
+      address: "localhost",
+      port: 6969,
+      password: "niggaonatricle",
+    },
+  ]

@@ -1,0 +1,35 @@
+{
+  "name": "guard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./build/Guard.js",
+  "scripts": {
+    "test": "tsc && clear && node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sxmurai/Guard.git"
+  },
+  "author": "Gavin#2545",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Sxmurai/Guard/issues"
+  },
+  "homepage": "https://github.com/Sxmurai/Guard#readme",
+  "dependencies": {
+    "@ayanaware/logger": "^2.2.1",
+    "@kyflx-dev/lavalink-types": "^1.0.2",
+    "@prisma/cli": "^2.0.0-beta.5",
+    "@prisma/client": "^2.0.0-beta.5",
+    "@types/ms": "^0.7.31",
+    "@types/node": "^14.0.1",
+    "@types/node-fetch": "^2.5.7",
+    "discord-akairo": "github:discord-akairo/discord-akairo",
+    "discord.js": "github:discordjs/discord.js",
+    "dot-prop": "^5.2.0",
+    "lavaclient": "^1.1.2",
+    "ms": "^2.1.2",
+    "node-fetch": "^2.6.0",
+    "yaml": "^1.10.0"
+  }
+}
