@@ -14,3 +14,23 @@ model configuration {
   id   String @id
   data String @default("{}")
 }
+
+model infractions {
+  id         String @id
+  moderator  String
+  target     String 
+  duration   Int   
+  reason     String
+  type       InfractionTypes
+  date       DateTime @default(now())
+  case       Int      @default(1)
+}
+
+enum InfractionTypes {
+  warn
+  kick
+  mute
+  ban
+  roleadd
+  roledelete
+}

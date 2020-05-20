@@ -22,6 +22,7 @@ declare module "discord-akairo" {
     db: SettingsProvider;
     logger: Logger;
     apis: APIManager;
+    snipes: Map<string, any[]>;
   }
 }
 
@@ -46,6 +47,7 @@ export default class GuardClient extends AkairoClient {
   public db: SettingsProvider = new SettingsProvider();
   public logger: Logger = Logger.get(GuardClient);
   public apis: APIManager = new APIManager(this, join("build", "core", "apis"));
+  public snipes: Map<string, any[]> = new Map();
 
   public manager: Manager = new Manager(config.get("nodes"), {
     shards: this.shard ? this.shard.count : 1,
@@ -53,9 +55,6 @@ export default class GuardClient extends AkairoClient {
       const guild = this.guilds.cache.get(id);
       if (guild) guild.shard.send(payload);
       return;
-    },
-    player: class GuardPlayer extends Player {
-      queue: Queue;
     },
   });
 
@@ -128,7 +127,7 @@ export default class GuardClient extends AkairoClient {
       inhibitorHandler: this.inhibitorHandler,
       lavaclient: this.manager,
       websocket: this.ws,
-	  settings: this.db,
+      settings: this.db,
       process,
     });
 

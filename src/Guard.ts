@@ -19,9 +19,9 @@ const client = new GuardClient({
     .start()
     .catch((err: Error): void => client.logger.error(`Oopies..\n${err}`));
 
-  // await prisma
-  //   .connect()
-  //   .catch((err: Error): void =>
-  //     client.logger.error(`Welp, that means the DB wont work..\n${err}`)
-  //   );
+  await prisma
+    .connect()
+    .catch((err: Error): void =>
+      client.logger.error(`Welp, that means the DB wont work..\n${err}`)
+    );
 })();
