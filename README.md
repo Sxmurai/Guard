@@ -4,7 +4,9 @@ A Discord bot written in TypeScript which will provide you with your everyday Di
 
 ## Features
 🎵 Music
+
 ⭐ Starboard
+
 🛠 Moderation
 
 And much more!
